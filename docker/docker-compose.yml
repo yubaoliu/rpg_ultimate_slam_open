@@ -1,0 +1,39 @@
+# Copyright (C) 2021, Yubao Liu, AISL, TOYOHASHI UNIVERSITY of TECHNOLOGY 
+# Email: yubao.liu.ra@tut.jp 
+version: '2.3'
+services:
+  ultimate_slam:
+    image: yubao/ultimate_slam
+    container_name: ultimate_slam
+    build:
+        context: .
+        # args:
+        #     - HTTP_PROXY=$HTTP_PROXY
+        #     - http_proxy=$HTTP_PROXY
+        #     - HTTPS_PROXY=$HTTPS_PROXY
+        #     - https_proxy=$HTTPS_PROXY
+    command: xterm
+    # lxterminal
+    # command:  bash
+    runtime: nvidia
+    privileged: true
+    stdin_open: true
+    tty: true
+    environment:
+        - DISPLAY
+        - QT_X11_NO_MITSHM=1
+    volumes:
+        - /tmp/.X11-unix:/tmp/.X11-unix:rw
+        - ..:/root/catkin_ws/src/ultimate_slam
+        - ${DATASET_DIR}:/root/dataset
+        # - ~/.vim:/root/.vim
+        # - ultimate_slam:/root
+        # - ./extern:/root/extern
+    entrypoint: /ros_entrypoint.sh
+    network_mode: host
+    dns:
+        - 8.8.8.8
+        - 4.4.4.4
+
+# volumes:
+#     ultimate_slam:

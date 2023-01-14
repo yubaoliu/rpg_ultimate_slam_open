@@ -6,22 +6,24 @@ catkin_simple()
 
 include(ze_setup)
 
+# set(CMAKE_CXX_STANDARD 11)
+
 #############
 # LIBRARIES #
 #############
 set(HEADERS
-  include/imp/feature_matching/brute_force_matcher.hpp
-  include/imp/feature_matching/hamming.hpp
-  include/imp/feature_matching/hamming-inl.hpp
-  include/imp/feature_matching/matching_types.hpp
-  include/imp/feature_matching/matching_viz.hpp
-  )
+    include/imp/feature_matching/brute_force_matcher.hpp
+    include/imp/feature_matching/hamming.hpp
+    include/imp/feature_matching/hamming-inl.hpp
+    include/imp/feature_matching/matching_types.hpp
+    include/imp/feature_matching/matching_viz.hpp
+    )
 
 set(SOURCES
-  src/brute_force_matcher.cpp
-  src/matching_types.cpp
-  src/matching_viz.cpp
-  )
+    src/brute_force_matcher.cpp
+    src/matching_types.cpp
+    src/matching_viz.cpp
+    )
 
 cs_add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
