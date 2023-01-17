@@ -217,10 +217,24 @@ RUN git clone https://github.com/ethz-asl/libvisensor /root/libvisensor \
     && cd  /root/libvisensor  \
     && sudo  ./install_libvisensor.sh
 
-RUN sudo apt update \
-    && sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y \
-    && sudo add-apt-repository ppa:inivation-ppa/inivation-bionic -y \
-    && sudo apt-get update \
+# install toolchain
+# RUN sudo apt update \
+#     && sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y \
+#     && sudo add-apt-repository ppa:inivation-ppa/inivation-bionic -y \
+#     && sudo apt-get update \
+#     && sudo apt-get install -y  dv-gui  libcaer-dev
+
+RUN echo "deb https://ppa.launchpadcontent.net/ubuntu-toolchain-r/test/ubuntu bionic main" >>/etc/apt/sources.list \
+    && echo "deb-src https://ppa.launchpadcontent.net/ubuntu-toolchain-r/test/ubuntu bionic main" >> /etc/apt/sources.list  \
+    && sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 60C317803A41BA51845E371A1E9377A2BA9EF27F \
+    && sudo apt update
+
+RUN echo "deb https://ppa.launchpadcontent.net/inivation-ppa/inivation-bionic/ubuntu bionic main" >> /etc/apt/sources.list  \
+    && echo "deb-src https://ppa.launchpadcontent.net/inivation-ppa/inivation-bionic/ubuntu bionic main" >> /etc/apt/sources.list \
+    && sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 1D3782C07F873130548A7E822F2CC7DEE2CE4E6A \
+    && sudo apt update
+
+RUN sudo apt-get update \
     && sudo apt-get install -y  dv-gui  libcaer-dev
 
 # catkin_simple
